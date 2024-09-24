@@ -1,0 +1,84 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Self-Hosted Ticket Management Blog</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="ticket-management.css">
+</head>
+<body>
+    <div class="header">
+        <a href="index.html">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
+            Home
+        </a>
+    </div>
+    <div class="title">
+        <h1>Self-Hosted Ticket Management</h1>    
+    </div>
+
+    <div class="spacer layer"></div>
+
+    <div class="content">
+        <p>After receiving countless texts and calls from my parents asking for help fixing tech issues around their home, I decided that I needed a simple way to track all of their complaints. I also wanted a way to document the steps I took to fix these issues for them so that they could refer back to my notes for any reoccuring issue.</p>
+
+        <p>After assessing the needs of my parents and the small scale of the project, I was clearly after a lightweight ticket management software that would be simple enough for my parents to use, but also boast the main features that one would expect from an enterprise level ticket management software. Enter <a href="https://peppermint.sh/">Peppermint</a>.</p>
+
+        <!-- <img src="peppermint-images/peppermint-homepage.png" alt="An image of Peppermint software admin dashboard."> -->
+
+    </div>
+
+    <img src="peppermint-images/peppermint-homepage.png" alt="An image of Peppermint software admin dashboard.">
+
+    <div class="content">
+        <p>Peppermint was created by <a href="https://github.com/potts99">Jack Andrews</a> and describes itself as a self-hosted alternative to popular services such as Zendesk. Its main features include ticket creation, a log of client history, and a notetaking tool. After touring the Peppermint website, I decided that this is the software I would use to assist me as my parents' personal helpdesk.</p>
+
+       <p>The first decision I needed to make was how I would host Peppermint so that it would be easily accessible to both my parents and I. I thought about hosting it on a spare laptop running Virtualbox, but then it would be susceptible to power outages and hardware failures. The official Peppermint Docs recommend using Linode, a cloud service provider powered by parent company, Akamai. However, the main problem with Linode is that after the free credit promotion for new users, they would charge me $5 per month to host Peppermint. I compared this to Amazon Web Services free tier for hosting PaaS which offers 75 hours of usage before reaching the paid threshold. This seemed much more appropriate for my situation, so it was time to jump into the cloud.</p>
+
+       <p>I configured an EC2 instance running the Amazon distribution of Linux and enabled a key pair privacy key for security purposes. I also set outbound rules in a security group for HTTP and HTTPS on port 80 and 443 respectively.</p>
+    </div>
+
+    <img src="peppermint-images/ec2-settings-screenshot.png" alt="Screenshot of my EC2 instance">
+
+    <div class="content">
+        <p>Next, I needed to deploy Peppermint within my EC2 instance. To do that though, I had to SSH into my instance from my laptop's terminal. I connected to my instance's public IP and used my key pair certificate to authorize my connection. Now that my connection was established, I had full control of the Linux OS running on my instance. The first thing I did from that point was install Docker along with Docker Compose. Once all the necessary tools were installed, I created a yml file and pasted the instructions from the Peppermint documentation for Docker to create the container and pull the image of Peppermint v3.11.</p>
+    </div>
+
+    <img class="darker-image" src="peppermint-images/docker-compose-screenshot.png" alt="Screenshot of Docker Compose pulling an image of Peppermint ticketing software.">
+
+    <div class="content">
+        <p> Success! Everything in the command line was working as expected. Peppermint should be accessible from the public IP of my EC2 instance. However, when I navigated to the public IP, I wasn't seeing Peppermint. To troubleshoot this issue, I went back to the yml file to read through the configuration of the Docker container. I realized that I didn't create an inbound rule for the port assigned to peppermint, which was port 3000.</p>
+    </div>
+
+    <img src="peppermint-images/security-group-screenshot.png" alt="Screenshot of the inbound rule for port 3000 in my AWS security group.">
+
+    <div class="content">
+        <p>After accessing the security group for my instance and creating this rule, I made sure I was navigating to the public IP on port 3000 and held my breath...</p>
+    </div>
+
+    <img src="peppermint-images/login-screenshot.png" alt="Screenshot of the login screen for Peppermint.">
+
+    <div class="content">
+        <p>I was finally running the Peppermint software on my own EC2 instance. It wasn't time to relax though. I logged into Peppermint using the default administrator credentials and created client accounts for both of my parents. Once they were created, I texted our family groupchat a link to the instance and told them to create a ticket whenever they had a tech issue. It wasn't long before I received my first ticket on the "Mom and Dad" Helpdesk.</p>
+    </div>
+
+    <img src="peppermint-images/first-ticket-screenshot.png" alt="Screenshot of the admin dashboard after the first ticket came in.">
+
+    <div class="content">
+        <p>The very first ticket that came through was labelled "Printer not working" and it was sent in by my Dad. I opened the ticket and got to work with assessing his issue. </p>
+    </div>
+    <img src="peppermint-images/first-ticket-dad.png" alt="Screenshot of the first ticket my Dad sent in asking for help with his printer.">
+
+    <div class="content">
+        <p>Ok, my dad did a bit of the legwork himself which I was very thankful for. He already checked that the printer is powered on and that it has ink and paper ready to go. Unfortunately, the printer still won't complete a print job for him. My first thought was to make sure that the printer is connected to the home wifi. If this was not the issue, I also gave him a follow up task to reset the print spooler.</p>
+    </div>
+
+    <img src="peppermint-images/first-ticket-dad-response.png" alt="A screenshot of my response to my Dad's printer ticket.">
+
+    <div class="content">
+        <p>After this, my dad called me and told me that he enjoyed using Peppermint and that my advice solved his problem (The printer wasn't connected to the wifi)! I'm so happy that this turned out to be a positive experience. I was able to learn a lot about technologies like Docker as well as reinforce my understanding of AWS. I'm also glad I got to practice my documentation skills in regards to ticket management. Oh wait.. I'd love to stick around, but another ticket just came in!</p>
+    </div>
+
+    <img src="peppermint-images/second-ticket.png" alt="Screenshot of the second ticket sent to Peppermint. An email issue.">
+</body>
+</html>

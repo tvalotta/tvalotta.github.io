@@ -1,11 +1,123 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Tommy's Repos</h1>
+    <div class="header" id="top">
+        <div class="left-links">
+            <a href="mailto:tommyvalotta@gmail.com">Email</a>
+            <a href="" hidden>LinkedIn</a>
+        </div>
+        <div class="right-links">
+            <a href="#projects">Projects</a>
+            <a href="#certifications">Certifications</a>
+            <a href="#skills">Skills</a>
+            <a href="#contact-me">Contact Me</a>
+        </div>
+    </div>
+    <div class="about-me">
+        <div class="info-container">
+            <h1>Thomas Valotta</h1>
+            <p>Tech enthusiast. Problem solver. IT professional. </p>
+        </div>
+        <div class="profile-image">
+            <img src="images/laptoprepair.png" alt="Profile picture for Tommy's Repos.">
+        </div>
+    </div>
+
+    <div class="spacer layer"></div>
+
+    <div class="project-showcase" id="projects">
+        <h1>My Projects</h1>
+        <div class="project-cards">
+            <div class="card"> <a href="business-network.html" target="_blank" rel="noreferrer noopener"><img src="./images/business-network.svg" alt=" An icon for the web app Hasenhuttl."></a><p>AD Domain</p> </div>
+            <div class="card"> <a href="ticket-management.html" target="_blank" rel="noreferrer noopener"><img src="images/peppermint.svg" alt=" A placeholder image for one of Tommy's Repos projects."></a><p>Self-Hosted Ticket System</p> </div>
+        </div>
+    </div>
+
+    <div class="spacer second-layer"></div>
+
+    <div class="certifications-showcase" id="certifications">
+        <h1>My Certifications</h1>
+        <div class="project-cards">
+            <div class="card"> <a href="comptia-a-plus.html" target="_blank" rel="noreferrer noopener"><img src="./images/Aplus Logo Certified CE.jpg" alt=" A placeholder image for one of Tommy's Repos projects."></a><p>CompTIA A+</p> </div>
+        </div>
+        
+    </div>
+
+    <div class="spacer third-layer"></div>
+
+    <div class="skills-showcase" id="skills">
+        <h1>My Skills</h1>
+
+        <div class="container">
+            <div class="carousel-view">
+                <button id="prev-btn" class="prev-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-left"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                </button>
+
+                <div id="item-list" class="item-list">
+                    <div>
+                        <img id="item" class="item" src="images/customerservice.png" alt="">
+                        <p>Customer Service</p>
+                    </div>
+                    <div>
+                        <img id="item" class="item" src="images/teamwork.png" alt="">
+                        <p>Teamwork</p>
+                    </div>
+                    <div>
+                        <img id="item" class="item" src="images/communication.svg" alt="">
+                        <p>Communication</p>
+                    </div>
+                    <div>
+                        <img id="item" class="item" src="images/problemsolving.jpg" alt="">
+                        <p>Problem-Solving</p>
+                    </div>
+                    <div>
+                        <img id="item" class="item" src="images/computernetwork.png" alt="">
+                        <p>Active Directory</p>
+                    </div>
+                    <div>
+                        <img id="item" class="item" src="images/troubleshooting.png" alt="">
+                        <p>Troubleshooting</p>
+                    </div>
+                    
+                </div>
+                <button id="next-btn" class="next-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                </button>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="spacer second-layer"></div>
+
+    <div class="contact-me" id="contact-me">
+        <h1>Don't hesitate to reach out...</h1>
+        <div class="form-container">
+            <form action="https://formspree.io/f/mwpeoqzy" method="POST">
+                <input type="text" name="name" id="name" class="form-inputs" placeholder="Enter Your Name" required>
+                <input type="email" name="email" id="email" class="form-inputs" placeholder="Enter Your Email" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$" required>
+                <textarea name="message" id="message" class="form-inputs" cols="30" rows="10" placeholder="Enter Your Message" required></textarea>
+                <input type="submit" value="Send Message" class="form-inputs">
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer-left-links">
+
+        </div>
+        <div class="footer-right-links">
+            <a href="#top" id="top">Back to top</a>
+        </div>
+    </div>
 </body>
 </html>
